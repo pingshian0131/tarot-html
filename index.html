@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>抽牌首頁</title>
+    <script src="js/bootstrap.bundle.js"></script>
+    <script src="js/bootstrap.esm.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/vue.global.prod.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap.rtl.css">
+    <link rel="stylesheet" href="css/bootstrap-grid.css">
+    <link rel="stylesheet" href="css/bootstrap-grid.rtl.css">
+    <link rel="stylesheet" href="css/bootstrap-reboot.css">
+    <link rel="stylesheet" href="css/bootstrap-reboot.rtl.css">
+    <link rel="stylesheet" href="css/bootstrap-utilities.css">
+    <link rel="stylesheet" href="css/bootstrap-utilities.rtl.css">
+    <style>
+        [v-cloak] {
+            display: block;
+            padding: 50px 0;
+        }
+
+        @keyframes spinner {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        [v-cloak]:before {
+            content: "";
+            box-sizing: border-box;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 40px;
+            height: 40px;
+            margin-top: -10px;
+            margin-left: -10px;
+            border-radius: 50%;
+            border: 2px solid #ccc;
+            border-top-color: #333;
+            animation: spinner 0.6s linear infinite;
+            text-indent: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        [v-cloak] > * {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<h1></h1>
+<div class="container mt-5" id="app" v-cloak>
+    <div class="row mb-3">
+        <div class="col">
+            <h2>請抽牌</h2>
+        </div>
+    </div>
+    <div class="row mb-3 d-flex justify-content-center d-md-none">
+        <div class="col-auto">
+            <img src="#" class="init" id="card-1-sm" alt="" height="98" width="60"
+                 @click="GetCard('card-1-sm')"
+                 style="border-radius: 10px;">
+        </div>
+        <div class="col-auto">
+            <img src="" class="init" id="card-2-sm" alt="" height="98" width="60"
+                 @click="GetCard('card-2-sm')"
+                 style="border-radius: 10px;">
+        </div>
+        <div class="col-auto">
+            <img src="" class="init" id="card-3-sm" alt="" height="98" width="60"
+                 @click="GetCard('card-3-sm')"
+                 style="border-radius: 10px;">
+        </div>
+    </div>
+
+    <div class="row mb-3 d-md-flex justify-content-between d-none d-lg-none">
+        <div class="col-auto">
+            <img src="" class="init" id="card-1-md" alt="" height="300" width="200"
+                 @click="GetCard('card-1-md')"
+                 style="border-radius: 10px;">
+        </div>
+        <div class="col-auto">
+            <img src="" class="init" id="card-2-md" alt="" height="300" width="200"
+                 @click="GetCard('card-2-md')"
+                 style="border-radius: 10px;">
+        </div>
+        <div class="col-auto">
+            <img src="" class="init" id="card-3-md" alt="" height="300" width="200"
+                 @click="GetCard('card-3-md')"
+                 style="border-radius: 10px;">
+        </div>
+    </div>
+
+
+    <div class="row mb-3 d-lg-flex justify-content-center d-none">
+        <div class="col-auto">
+            <img src="" class="init" id="card-1-lg" alt="" height="500" width="350"
+                 @click="GetCard('card-1-lg')"
+                 style="border-radius: 10px;">
+        </div>
+        <div class="col-auto">
+            <img src="" class="init" id="card-2-lg" alt="" height="500" width="350"
+                 @click="GetCard('card-2-lg')"
+                 style="border-radius: 10px;">
+        </div>
+        <div class="col-auto">
+            <img src="" class="init" id="card-3-lg" alt="" height="500" width="350"
+                 @click="GetCard('card-3-lg')"
+                 style="border-radius: 10px;">
+        </div>
+    </div>
+
+    <div class="row mt-5 mb-3 d-flex justify-content-center">
+        <div class="col-auto">
+            <button name="refresh" class="btn btn-secondary" @click="reload()">重新抽牌</button>
+        </div>
+    </div>
+
+</div>
+
+<script src="js/index.js"></script>
+</body>
+</html>
