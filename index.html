@@ -7,7 +7,6 @@
     <script src="js/bootstrap.bundle.js"></script>
     <script src="js/bootstrap.esm.js"></script>
     <script src="js/bootstrap.js"></script>
-    <script src="js/vue.global.prod.js"></script>
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap.rtl.css">
     <link rel="stylesheet" href="css/bootstrap-grid.css">
@@ -17,44 +16,17 @@
     <link rel="stylesheet" href="css/bootstrap-utilities.css">
     <link rel="stylesheet" href="css/bootstrap-utilities.rtl.css">
     <style>
-        [v-cloak] {
-            display: block;
-            padding: 50px 0;
+        .init {
+            cursor: pointer;
         }
-
-        @keyframes spinner {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        [v-cloak]:before {
-            content: "";
-            box-sizing: border-box;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 40px;
-            height: 40px;
-            margin-top: -10px;
-            margin-left: -10px;
-            border-radius: 50%;
-            border: 2px solid #ccc;
-            border-top-color: #333;
-            animation: spinner 0.6s linear infinite;
-            text-indent: 100%;
-            white-space: nowrap;
-            overflow: hidden;
-        }
-
-        [v-cloak] > * {
-            display: none;
+        .intro {
+            cursor: zoom-in;
         }
     </style>
 </head>
 <body>
 <h1></h1>
-<div class="container mt-5" id="app" v-cloak>
+<div class="container mt-5">
     <div class="row mb-3">
         <div class="col">
             <h2>請抽牌</h2>
@@ -62,18 +34,18 @@
     </div>
     <div class="row mb-3 d-flex justify-content-center d-md-none">
         <div class="col-auto">
-            <img src="#" class="init" id="card-1-sm" alt="" height="98" width="60"
-                 @click="GetCard('card-1-sm')"
+            <img src="#" alt="" class="init" id="card-1-sm" height="98" width="60"
+                 onclick="GetCard('card-1-sm')"
                  style="border-radius: 10px;">
         </div>
         <div class="col-auto">
             <img src="" class="init" id="card-2-sm" alt="" height="98" width="60"
-                 @click="GetCard('card-2-sm')"
+                 onclick="GetCard('card-2-sm')"
                  style="border-radius: 10px;">
         </div>
         <div class="col-auto">
             <img src="" class="init" id="card-3-sm" alt="" height="98" width="60"
-                 @click="GetCard('card-3-sm')"
+                 onclick="GetCard('card-3-sm')"
                  style="border-radius: 10px;">
         </div>
     </div>
@@ -81,48 +53,79 @@
     <div class="row mb-3 d-md-flex justify-content-between d-none d-lg-none">
         <div class="col-auto">
             <img src="" class="init" id="card-1-md" alt="" height="300" width="200"
-                 @click="GetCard('card-1-md')"
+                 onclick="GetCard('card-1-md')"
                  style="border-radius: 10px;">
         </div>
         <div class="col-auto">
             <img src="" class="init" id="card-2-md" alt="" height="300" width="200"
-                 @click="GetCard('card-2-md')"
+                 onclick="GetCard('card-2-md')"
                  style="border-radius: 10px;">
         </div>
         <div class="col-auto">
             <img src="" class="init" id="card-3-md" alt="" height="300" width="200"
-                 @click="GetCard('card-3-md')"
+                 onclick="GetCard('card-3-md')"
                  style="border-radius: 10px;">
         </div>
     </div>
 
-
     <div class="row mb-3 d-lg-flex justify-content-center d-none">
         <div class="col-auto">
             <img src="" class="init" id="card-1-lg" alt="" height="500" width="350"
-                 @click="GetCard('card-1-lg')"
+                 onclick="GetCard('card-1-lg')"
                  style="border-radius: 10px;">
         </div>
         <div class="col-auto">
             <img src="" class="init" id="card-2-lg" alt="" height="500" width="350"
-                 @click="GetCard('card-2-lg')"
+                 onclick="GetCard('card-2-lg')"
                  style="border-radius: 10px;">
         </div>
         <div class="col-auto">
             <img src="" class="init" id="card-3-lg" alt="" height="500" width="350"
-                 @click="GetCard('card-3-lg')"
+                 onclick="GetCard('card-3-lg')"
                  style="border-radius: 10px;">
         </div>
     </div>
 
     <div class="row mt-5 mb-3 d-flex justify-content-center">
         <div class="col-auto">
-            <button name="refresh" class="btn btn-secondary" @click="reload()">重新抽牌</button>
+            <button name="refresh" class="btn btn-secondary" onclick="reload()">重新抽牌</button>
         </div>
     </div>
 
 </div>
 
-<script src="js/index.js"></script>
+<script>
+    const isValid = {
+        sm: [0, 0, 0],
+        md: [0, 0, 0],
+        lg: [0, 0, 0],
+    }
+
+    function _getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function GetCard(id) {
+        const size = id.split('-')[2];
+        const num = id.split('-')[1];
+        if (isValid[size][parseInt(num) - 1] === 0) {
+            const index = _getRandomInt(1, 49);
+            const ele = document.querySelector(`#card-${num}-${size}`);
+            ele.src = `img/${index}.jpg`;
+            ele.className = 'intro';
+            isValid[size][parseInt(num) - 1] = 1;
+        }
+    }
+
+    function reload() {
+        window.location.reload();
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll(".init").forEach((ele) => {
+            ele.src = "img/0.jpg";
+        })
+    });
+</script>
 </body>
 </html>
